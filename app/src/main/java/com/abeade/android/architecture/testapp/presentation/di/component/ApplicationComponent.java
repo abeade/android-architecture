@@ -1,27 +1,15 @@
 package com.abeade.android.architecture.testapp.presentation.di.component;
 
-import android.content.Context;
+import com.abeade.android.architecture.testapp.presentation.application.TestApplication;
+import com.abeade.android.architecture.testapp.presentation.di.module.MainActivityModule;
 
-import com.abeade.android.architecture.testapp.presentation.di.module.ApplicationModule;
-import com.abeade.android.architecture.testapp.presentation.view.activity.BaseActivity;
-
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
-import io.reactivex.Scheduler;
 
 @Singleton
-@Component(modules = {AndroidInjectionModule.class, ApplicationModule.class})
+@Component(modules = {AndroidInjectionModule.class, MainActivityModule.class})
 public interface ApplicationComponent {
-    void inject(BaseActivity baseActivity);
-
-    Context context();
-
-    @Named("Observer")
-    Scheduler provideObserverScheduler();
-
-    @Named("Subscriber")
-    Scheduler providSubscriberScheduler();
+    void inject(TestApplication application);
 }
