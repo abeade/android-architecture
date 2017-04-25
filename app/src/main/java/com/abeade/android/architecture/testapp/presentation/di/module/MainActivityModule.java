@@ -1,38 +1,28 @@
 package com.abeade.android.architecture.testapp.presentation.di.module;
 
-import android.app.Activity;
-
-import com.abeade.android.architecture.testapp.presentation.di.component.MainActivitySubcomponent;
+import com.abeade.android.architecture.testapp.presentation.navigation.Navigator;
+import com.abeade.android.architecture.testapp.presentation.navigation.NavigatorImpl;
+import com.abeade.android.architecture.testapp.presentation.presenter.MainActivityPresenter;
+import com.abeade.android.architecture.testapp.presentation.presenter.MainActivityPresenterImpl;
+import com.abeade.android.architecture.testapp.presentation.view.MainActivityView;
 import com.abeade.android.architecture.testapp.presentation.view.activity.MainActivity;
-
-import javax.inject.Named;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import dagger.android.ActivityKey;
-import dagger.android.AndroidInjector;
-import dagger.multibindings.IntoMap;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-@Module(subcomponents = {MainActivitySubcomponent.class})
+@Module
 public abstract class MainActivityModule {
     @Provides
-    @Named("Observer")
-    static Scheduler provideObserverScheduler() {
-        return AndroidSchedulers.mainThread();
+    static Navigator provideNavigator(MainActivity activity) {
+        return new NavigatorImpl(activity);
     }
 
     @Provides
-    @Named("Subscriber")
-    static Scheduler provideSubscriberScheduler() {
-        return Schedulers.io();
+    static MainActivityPresenter providePresenter(MainActivityView view, Navigator navigator) {
+        return new MainActivityPresenterImpl(view, navigator);
     }
 
     @Binds
-    @IntoMap
-    @ActivityKey(MainActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity> bindMainActivityInjectorFactory(MainActivitySubcomponent.Builder builder);
+    abstract MainActivityView provideMainActivityView(MainActivity featureActivity);
 }
