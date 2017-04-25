@@ -24,6 +24,7 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
 
     @Override
     public void loadData() {
+        showText("Loading...");
         testUseCase.execute(new DisposableObserver<String>() {
             @Override
             public void onNext(@NonNull String s) {

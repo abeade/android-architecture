@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasDispatchingActivityInjector;
 
-public class TestApplication extends Application implements HasDispatchingActivityInjector {
+public abstract class BaseApplication extends Application implements HasDispatchingActivityInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> dispatchingActivityInjector;

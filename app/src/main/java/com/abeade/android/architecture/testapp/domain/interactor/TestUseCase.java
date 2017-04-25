@@ -14,6 +14,9 @@ public class TestUseCase extends BaseUseCase<String, Void> {
 
     @Override
     Observable<String> getObservable(Void aVoid) {
-        return Observable.just("Hello world");
+        return Observable.defer(() -> {
+            Thread.sleep(5000);
+            return Observable.just("Hello world");
+        });
     }
 }

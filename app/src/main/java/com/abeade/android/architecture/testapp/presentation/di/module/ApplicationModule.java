@@ -2,7 +2,7 @@ package com.abeade.android.architecture.testapp.presentation.di.module;
 
 import android.content.Context;
 
-import com.abeade.android.architecture.testapp.presentation.application.TestApplication;
+import com.abeade.android.architecture.testapp.presentation.application.BaseApplication;
 import com.abeade.android.architecture.testapp.presentation.di.component.MainActivitySubcomponent;
 
 import javax.inject.Named;
@@ -35,7 +35,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Context provideContext(TestApplication application) {
+    Context provideContext(BaseApplication application) {
         return application.getApplicationContext();
     }
 
