@@ -33,6 +33,24 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
+
+    @Override
     public void setText(String text) {
         tvContent.setText(text);
     }
