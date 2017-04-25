@@ -8,9 +8,12 @@ import com.abeade.android.architecture.testapp.presentation.presenter.MainActivi
 import com.abeade.android.architecture.testapp.presentation.view.MainActivityView;
 import com.abeade.android.architecture.testapp.presentation.view.activity.MainActivity;
 
+import javax.inject.Named;
+
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.Scheduler;
 
 @Module
 public abstract class MainActivityModule {
@@ -22,8 +25,8 @@ public abstract class MainActivityModule {
 
     @Provides
     @PerActivity
-    static MainActivityPresenter providePresenter(MainActivityView view, Navigator navigator) {
-        return new MainActivityPresenterImpl(view, navigator);
+    static MainActivityPresenter providePresenter(MainActivityView view, @Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler, Navigator navigator) {
+        return new MainActivityPresenterImpl(view, observerScheduler, subscriberScheduler, navigator);
     }
 
     @Binds
