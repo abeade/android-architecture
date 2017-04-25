@@ -59,6 +59,6 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
 
     @Override
     public void onDestroy() {
-
+        testUseCase.dispose();
     }
 }
