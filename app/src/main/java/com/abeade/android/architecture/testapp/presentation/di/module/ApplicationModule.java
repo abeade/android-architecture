@@ -6,6 +6,7 @@ import com.abeade.android.architecture.testapp.presentation.application.TestAppl
 import com.abeade.android.architecture.testapp.presentation.di.component.MainActivitySubcomponent;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,18 +20,22 @@ import io.reactivex.schedulers.Schedulers;
 @Module(subcomponents = { MainActivitySubcomponent.class /* Add additional sub components here */ })
 public class ApplicationModule {
     @Provides
+    @Singleton
     @Named("Observer")
     static Scheduler provideObserverScheduler() {
         return AndroidSchedulers.mainThread();
     }
 
     @Provides
+    @Singleton
     @Named("Subscriber")
     static Scheduler provideSubscriberScheduler() {
         return Schedulers.io();
     }
 
-    @Provides Context provideContext(TestApplication application) {
+    @Provides
+    @Singleton
+    Context provideContext(TestApplication application) {
         return application.getApplicationContext();
     }
 
