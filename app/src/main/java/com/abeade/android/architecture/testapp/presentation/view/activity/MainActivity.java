@@ -2,26 +2,22 @@ package com.abeade.android.architecture.testapp.presentation.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.abeade.android.architecture.testapp.R;
 import com.abeade.android.architecture.testapp.presentation.presenter.MainActivityPresenter;
 import com.abeade.android.architecture.testapp.presentation.view.MainActivityView;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
-import io.reactivex.Scheduler;
 
 public class MainActivity extends AppCompatActivity implements MainActivityView {
 
-    @Inject
-    @Named("Observer")
-    Scheduler observerScheduler;
-
-    @Inject
-    @Named("Subscriber")
-    Scheduler subscriberScheduler;
+    @BindView(R.id.tv_content)
+    TextView tvContent;
 
     @Inject
     MainActivityPresenter presenter;
@@ -31,11 +27,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        presenter.doNothing();
+        ButterKnife.bind(this);
+
+        presenter.loadData();
     }
 
     @Override
-    public void doNothing() {
-
+    public void setText(String text) {
+        tvContent.setText(text);
     }
 }

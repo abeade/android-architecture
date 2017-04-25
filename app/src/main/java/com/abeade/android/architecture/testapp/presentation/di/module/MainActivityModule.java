@@ -1,5 +1,6 @@
 package com.abeade.android.architecture.testapp.presentation.di.module;
 
+import com.abeade.android.architecture.testapp.domain.interactor.TestUseCase;
 import com.abeade.android.architecture.testapp.presentation.di.PerActivity;
 import com.abeade.android.architecture.testapp.presentation.navigation.Navigator;
 import com.abeade.android.architecture.testapp.presentation.navigation.NavigatorImpl;
@@ -25,8 +26,14 @@ public abstract class MainActivityModule {
 
     @Provides
     @PerActivity
-    static MainActivityPresenter providePresenter(MainActivityView view, @Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler, Navigator navigator) {
-        return new MainActivityPresenterImpl(view, observerScheduler, subscriberScheduler, navigator);
+    static TestUseCase provideTestUseCase(@Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler) {
+        return new TestUseCase(observerScheduler, subscriberScheduler);
+    }
+
+    @Provides
+    @PerActivity
+    static MainActivityPresenter providePresenter(MainActivityView view, TestUseCase testUseCase, Navigator navigator) {
+        return new MainActivityPresenterImpl(view, testUseCase, navigator);
     }
 
     @Binds
