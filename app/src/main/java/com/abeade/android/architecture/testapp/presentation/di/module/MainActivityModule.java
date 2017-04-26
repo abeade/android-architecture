@@ -1,9 +1,10 @@
 package com.abeade.android.architecture.testapp.presentation.di.module;
 
+import android.app.Activity;
+
 import com.abeade.android.architecture.testapp.domain.interactor.TestUseCase;
 import com.abeade.android.architecture.testapp.presentation.di.PerActivity;
 import com.abeade.android.architecture.testapp.presentation.navigation.Navigator;
-import com.abeade.android.architecture.testapp.presentation.navigation.NavigatorImpl;
 import com.abeade.android.architecture.testapp.presentation.presenter.MainActivityPresenter;
 import com.abeade.android.architecture.testapp.presentation.presenter.MainActivityPresenterImpl;
 import com.abeade.android.architecture.testapp.presentation.view.MainActivityView;
@@ -18,11 +19,6 @@ import io.reactivex.Scheduler;
 
 @Module
 public abstract class MainActivityModule {
-    @Provides
-    @PerActivity
-    static Navigator provideNavigator(MainActivity activity) {
-        return new NavigatorImpl(activity);
-    }
 
     @Provides
     @PerActivity
@@ -35,6 +31,10 @@ public abstract class MainActivityModule {
     static MainActivityPresenter providePresenter(MainActivityView view, TestUseCase testUseCase, Navigator navigator) {
         return new MainActivityPresenterImpl(view, testUseCase, navigator);
     }
+
+    @Binds
+    @PerActivity
+    abstract Activity provideActivity(MainActivity featureActivity);
 
     @Binds
     @PerActivity

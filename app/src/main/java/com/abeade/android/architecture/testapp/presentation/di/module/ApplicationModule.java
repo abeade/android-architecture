@@ -19,6 +19,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 @Module(subcomponents = { MainActivitySubcomponent.class /* Add additional sub components here */ })
 public class ApplicationModule {
+
     @Provides
     @Singleton
     @Named("Observer")
