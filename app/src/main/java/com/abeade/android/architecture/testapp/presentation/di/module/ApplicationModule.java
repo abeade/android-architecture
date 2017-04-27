@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Application module refers to sub components and provides application level dependencies.
  */
-@Module(subcomponents = { MainActivitySubcomponent.class /* Add additional sub components here */ })
+@Module(includes = NetworkModule.class, subcomponents = { MainActivitySubcomponent.class /* Add additional sub components here */ })
 public class ApplicationModule {
 
     @Provides

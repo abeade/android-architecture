@@ -3,6 +3,8 @@ package com.abeade.android.architecture.testapp.data.webservice.model.response;
 import com.google.gson.annotations.SerializedName;
 
 public class UserDto {
+    @SerializedName("id")
+    private int id;
     @SerializedName("name")
     private String name;
     @SerializedName("email")
@@ -13,6 +15,14 @@ public class UserDto {
     private String bio;
     @SerializedName("image")
     private String image;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
