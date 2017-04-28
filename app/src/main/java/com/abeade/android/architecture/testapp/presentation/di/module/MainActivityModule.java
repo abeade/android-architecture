@@ -2,6 +2,7 @@ package com.abeade.android.architecture.testapp.presentation.di.module;
 
 import android.app.Activity;
 
+import com.abeade.android.architecture.testapp.data.webservice.api.UsersApi;
 import com.abeade.android.architecture.testapp.domain.interactor.TestUseCase;
 import com.abeade.android.architecture.testapp.presentation.di.PerActivity;
 import com.abeade.android.architecture.testapp.presentation.navigation.Navigator;
@@ -22,8 +23,8 @@ public abstract class MainActivityModule {
 
     @Provides
     @PerActivity
-    static TestUseCase provideTestUseCase(@Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler) {
-        return new TestUseCase(observerScheduler, subscriberScheduler);
+    static TestUseCase provideTestUseCase(@Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler, UsersApi usersApi) {
+        return new TestUseCase(observerScheduler, subscriberScheduler, usersApi);
     }
 
     @Provides
