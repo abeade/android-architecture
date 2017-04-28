@@ -16,6 +16,18 @@ public class UserDto {
     @SerializedName("image")
     private String image;
 
+    public UserDto() {
+    }
+
+    public UserDto(int id, String name, String email, String address, String bio, String image) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.bio = bio;
+        this.image = image;
+    }
+
     public int getId() {
         return id;
     }

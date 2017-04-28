@@ -11,7 +11,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.abeade.android.architecture.testapp.setup.UiTestsRunner"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -111,6 +111,8 @@ dependencies {
     unmock 'org.robolectric:android-all:6.0.0_r1-robolectric-0'
 
     // Instrumentation test
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:${dagger}"
+    androidTestCompile "com.squareup.retrofit2:retrofit-mock:${retrofit}"
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs'

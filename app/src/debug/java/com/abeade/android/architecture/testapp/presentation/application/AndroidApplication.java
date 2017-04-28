@@ -3,7 +3,7 @@ package com.abeade.android.architecture.testapp.presentation.application;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
-public class TestApplication extends BaseApplication {
+public class AndroidApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();

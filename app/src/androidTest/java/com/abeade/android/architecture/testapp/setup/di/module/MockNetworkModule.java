@@ -1,7 +1,8 @@
-package com.abeade.android.architecture.testapp.presentation.di.module;
+package com.abeade.android.architecture.testapp.setup.di.module;
 
 import com.abeade.android.architecture.testapp.data.webservice.WebserviceConstants;
 import com.abeade.android.architecture.testapp.data.webservice.api.UsersApi;
+import com.abeade.android.architecture.testapp.setup.data.webservice.MockUserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,12 +16,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.mock.BehaviorDelegate;
+import retrofit2.mock.MockRetrofit;
+import retrofit2.mock.NetworkBehavior;
 
-/**
- * Application module refers to sub components and provides application level dependencies.
- */
 @Module
-public class NetworkModule {
+public class MockNetworkModule {
 
     @Provides
     @Singleton
@@ -65,7 +66,18 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    UsersApi getUsersService(Retrofit retrofit) {
-        return retrofit.create(UsersApi.class);
+    MockRetrofit provideMockRetrofit(Retrofit retrofit) {
+        NetworkBehavior behavior = NetworkBehavior.create();
+
+        return new MockRetrofit.Builder(retrofit)
+                .networkBehavior(behavior)
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    UsersApi getUsersService(MockRetrofit mockRetrofit) {
+        final BehaviorDelegate<UsersApi> delegate = mockRetrofit.create(UsersApi.class);
+        return new MockUserService(delegate);
     }
 }

@@ -20,6 +20,6 @@ public interface UsersApi {
     @GET(WebserviceConstants.Users.PATH_GET_USERS)
     Observable<BaseResponseDto<List<UserDto>>> getUsers(@Query(WebserviceConstants.Parameters.PAGE) int page, @Query(WebserviceConstants.Parameters.LIMIT) int limit);
 
-    @GET(WebserviceConstants.Users.PATH_GET_USERS)
-    Observable<BaseResponseDto<List<UserDto>>> getUser(@Path(WebserviceConstants.Parameters.USER_ID) int userId);
+    @GET(WebserviceConstants.Users.PATH_GET_USER)
+    Observable<BaseResponseDto<UserDto>> getUser(@Path(WebserviceConstants.Parameters.USER_ID) int userId);
 }

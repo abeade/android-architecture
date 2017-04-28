@@ -17,6 +17,10 @@ public abstract class BaseApplication extends Application implements HasDispatch
 
     @Override public void onCreate() {
         super.onCreate();
+        initializeInjector();
+    }
+
+    protected void initializeInjector() {
         DaggerApplicationComponent.create().inject(this);
     }
 
