@@ -70,7 +70,7 @@ public class MockNetworkModule {
     @Singleton
     MockRetrofit provideMockRetrofit(Retrofit retrofit) {
         NetworkBehavior behavior = NetworkBehavior.create();
-
+        behavior.setDelay(1000, TimeUnit.MILLISECONDS);
         return new MockRetrofit.Builder(retrofit)
                 .networkBehavior(behavior)
                 .build();
