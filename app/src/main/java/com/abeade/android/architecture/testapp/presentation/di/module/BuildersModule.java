@@ -11,9 +11,6 @@ import dagger.android.ActivityKey;
 import dagger.android.AndroidInjector;
 import dagger.multibindings.IntoMap;
 
-/**
- * This module contains all the binding to the sub component builders in the app
- */
 @Module
 public abstract class BuildersModule {
 

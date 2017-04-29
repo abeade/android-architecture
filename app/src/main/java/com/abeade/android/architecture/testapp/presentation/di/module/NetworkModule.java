@@ -17,9 +17,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Application module refers to sub components and provides application level dependencies.
- */
 @Module
 public class NetworkModule {
 
@@ -28,20 +25,19 @@ public class NetworkModule {
     OkHttpClient provideOkHttpClient() {
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
 
-        // Logging OkHttp requests
+        // Logging level
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(WebserviceConstants.LOG_LEVEL);
+        httpClient.addInterceptor(logging);
 
         // Setting Connection Timeout
         httpClient.connectTimeout(WebserviceConstants.TIME_OUT_MILLIS, TimeUnit.MILLISECONDS);
         httpClient.writeTimeout(WebserviceConstants.TIME_OUT_MILLIS, TimeUnit.MILLISECONDS);
         httpClient.readTimeout(WebserviceConstants.TIME_OUT_MILLIS, TimeUnit.MILLISECONDS);
 
-        //Sets Redirects
+        // Redirects
         httpClient.followRedirects(true);
         httpClient.followSslRedirects(true);
-
-        httpClient.addInterceptor(logging);
 
         return httpClient.build();
     }

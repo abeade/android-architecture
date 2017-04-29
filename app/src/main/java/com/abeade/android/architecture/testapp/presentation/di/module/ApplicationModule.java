@@ -14,9 +14,6 @@ import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Application module refers to sub components and provides application level dependencies.
- */
 @Module(subcomponents = { MainActivitySubcomponent.class /* Add additional sub components here */ })
 public class ApplicationModule {
 
