@@ -6,10 +6,13 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.abeade.android.architecture.testapp.presentation.view.activity.MainActivity;
+import com.abeade.android.architecture.testapp.setup.TestAndroidApplication;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -31,6 +34,8 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void validateUserLoaded() throws InterruptedException {
+        ((TestAndroidApplication)InstrumentationRegistry.getTargetContext().getApplicationContext()).getNetworkBehavior().setDelay(1000, TimeUnit.MILLISECONDS);
+
         onView(withId(R.id.tv_content)).check(matches(withText("Loading...")));
         Thread.sleep(2000);
         onView(withId(R.id.tv_content)).check(matches(withText("Name0")));
