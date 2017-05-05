@@ -2,7 +2,7 @@
 
 ### THIS PROJECT IS STILL A WORK IN PROGRESS
 
-This demo application is based on the [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles and the [Model-View-Presenter](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) (MVP) architecture.
+This demo application is based on the [Clean Architecture](https://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles and the [Model-View-Presenter](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) (MVP) architectural pattern.
 
 ![Application architecture](architecture.png)
 
