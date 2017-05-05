@@ -1,7 +1,7 @@
 package com.abeade.android.architecture.testapp.presentation.di.module;
 
-import com.abeade.android.architecture.testapp.data.webservice.WebserviceConstants;
-import com.abeade.android.architecture.testapp.data.webservice.api.UsersApi;
+import com.abeade.android.architecture.testapp.data.network.WebserviceConstants;
+import com.abeade.android.architecture.testapp.data.network.api.UsersApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

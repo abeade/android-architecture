@@ -1,9 +1,9 @@
-package com.abeade.android.architecture.testapp.data.webservice.api;
+package com.abeade.android.architecture.testapp.data.network.api;
 
 
-import com.abeade.android.architecture.testapp.data.webservice.WebserviceConstants;
-import com.abeade.android.architecture.testapp.data.webservice.model.response.BaseResponseDto;
-import com.abeade.android.architecture.testapp.data.webservice.model.response.UserDto;
+import com.abeade.android.architecture.testapp.data.network.WebserviceConstants;
+import com.abeade.android.architecture.testapp.data.network.model.response.BaseResponseDto;
+import com.abeade.android.architecture.testapp.data.network.model.response.UserDto;
 
 import java.util.List;
 

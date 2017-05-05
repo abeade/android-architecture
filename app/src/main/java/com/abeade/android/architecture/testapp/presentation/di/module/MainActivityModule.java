@@ -2,8 +2,10 @@ package com.abeade.android.architecture.testapp.presentation.di.module;
 
 import android.app.Activity;
 
-import com.abeade.android.architecture.testapp.data.webservice.api.UsersApi;
-import com.abeade.android.architecture.testapp.domain.interactor.TestUseCase;
+import com.abeade.android.architecture.testapp.domain.interactor.UseCaseExecutor;
+import com.abeade.android.architecture.testapp.domain.interactor.UsersUseCase;
+import com.abeade.android.architecture.testapp.domain.model.UserViewItem;
+import com.abeade.android.architecture.testapp.domain.repository.UsersRepository;
 import com.abeade.android.architecture.testapp.presentation.di.PerActivity;
 import com.abeade.android.architecture.testapp.presentation.navigation.Navigator;
 import com.abeade.android.architecture.testapp.presentation.presenter.MainActivityPresenter;
@@ -23,14 +25,20 @@ public abstract class MainActivityModule {
 
     @Provides
     @PerActivity
-    static TestUseCase provideTestUseCase(@Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler, UsersApi usersApi) {
-        return new TestUseCase(observerScheduler, subscriberScheduler, usersApi);
+    static UsersUseCase provideTestUseCase(UsersRepository usersRepository) {
+        return new UsersUseCase(usersRepository);
     }
 
     @Provides
     @PerActivity
-    static MainActivityPresenter providePresenter(MainActivityView view, TestUseCase testUseCase, Navigator navigator) {
-        return new MainActivityPresenterImpl(view, testUseCase, navigator);
+    static UseCaseExecutor<UserViewItem, Integer> useCaseExecutor(@Named("Observer") Scheduler observerScheduler, @Named("Subscriber") Scheduler subscriberScheduler, UsersUseCase testUseCase) {
+        return new UseCaseExecutor<>(observerScheduler, subscriberScheduler, testUseCase);
+    }
+
+    @Provides
+    @PerActivity
+    static MainActivityPresenter providePresenter(MainActivityView view, UseCaseExecutor<UserViewItem, Integer>  useCaseExecutor, Navigator navigator) {
+        return new MainActivityPresenterImpl(view, useCaseExecutor, navigator);
     }
 
     @Binds

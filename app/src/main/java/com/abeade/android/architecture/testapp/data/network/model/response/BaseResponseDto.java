@@ -1,4 +1,4 @@
-package com.abeade.android.architecture.testapp.data.webservice.model.response;
+package com.abeade.android.architecture.testapp.data.network.model.response;
 
 import com.google.gson.annotations.SerializedName;
 

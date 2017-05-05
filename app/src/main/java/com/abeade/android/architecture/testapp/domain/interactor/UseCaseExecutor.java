@@ -6,18 +6,22 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-public abstract class BaseUseCase<T, Params> {
+public class UseCaseExecutor<T, Params> implements Disposable {
     private final CompositeDisposable disposables;
     private final Scheduler observerScheduler;
     private final Scheduler subscriberScheduler;
+    private final UseCase<T, Params> useCase;
 
-    BaseUseCase(Scheduler observerScheduler, Scheduler subscriberScheduler) {
+    public UseCaseExecutor(Scheduler observerScheduler, Scheduler subscriberScheduler, UseCase<T, Params> useCase) {
         this.observerScheduler = observerScheduler;
         this.subscriberScheduler = subscriberScheduler;
+        this.useCase = useCase;
         this.disposables = new CompositeDisposable();
     }
 
-    abstract Observable<T> getObservable(Params params);
+    public Observable<T> getObservable(Params params) {
+        return useCase.getObservable(params);
+    }
 
     public void execute(DisposableObserver<T> observer, Params params) {
         final Observable<T> observable = this.getObservable(params)
@@ -26,10 +30,16 @@ public abstract class BaseUseCase<T, Params> {
         addDisposable(observable.subscribeWith(observer));
     }
 
+    @Override
     public void dispose() {
         if (!disposables.isDisposed()) {
             disposables.dispose();
         }
+    }
+
+    @Override
+    public boolean isDisposed() {
+        return disposables.isDisposed();
     }
 
     private void addDisposable(Disposable disposable) {

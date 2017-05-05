@@ -1,4 +1,4 @@
-package com.abeade.android.architecture.testapp.data.webservice;
+package com.abeade.android.architecture.testapp.data.network;
 
 import okhttp3.logging.HttpLoggingInterceptor;
 

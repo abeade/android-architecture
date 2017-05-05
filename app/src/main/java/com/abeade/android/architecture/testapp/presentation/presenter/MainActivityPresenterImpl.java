@@ -1,6 +1,10 @@
 package com.abeade.android.architecture.testapp.presentation.presenter;
 
-import com.abeade.android.architecture.testapp.domain.interactor.TestUseCase;
+import android.support.annotation.StringRes;
+
+import com.abeade.android.architecture.testapp.R;
+import com.abeade.android.architecture.testapp.domain.interactor.UseCaseExecutor;
+import com.abeade.android.architecture.testapp.domain.model.UserViewItem;
 import com.abeade.android.architecture.testapp.presentation.navigation.Navigator;
 import com.abeade.android.architecture.testapp.presentation.view.MainActivityView;
 
@@ -13,39 +17,44 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
 
     private final MainActivityView view;
     private final Navigator navigator;
-    private final TestUseCase testUseCase;
+    private final UseCaseExecutor<UserViewItem, Integer> useCaseExecutor;
 
     @Inject
-    public MainActivityPresenterImpl(MainActivityView view, TestUseCase testUseCase, Navigator navigator) {
+    public MainActivityPresenterImpl(MainActivityView view, UseCaseExecutor<UserViewItem, Integer> useCaseExecutor, Navigator navigator) {
         this.view = view;
-        this.testUseCase = testUseCase;
+        this.useCaseExecutor = useCaseExecutor;
         this.navigator = navigator;
     }
 
     @Override
     public void loadData() {
-        showText("Loading...");
-        testUseCase.execute(new DisposableObserver<String>() {
+        showText(R.string.loading);
+        useCaseExecutor.execute(new DisposableObserver<UserViewItem>() {
             @Override
-            public void onNext(@NonNull String s) {
-                showText(s);
+            public void onNext(@NonNull UserViewItem s) {
+                showText(s.getName());
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                showText(R.string.error);
             }
 
             @Override
             public void onComplete() {
 
             }
-        }, null);
+        }, 0);
     }
 
     @Override
-    public void showText(String text) {
-        view.setText(text);
+    public void showText(String string) {
+        view.setText(string);
+    }
+
+    @Override
+    public void showText(@StringRes int stringId) {
+        view.setText(stringId);
     }
 
     @Override
@@ -60,6 +69,6 @@ public class MainActivityPresenterImpl implements MainActivityPresenter {
 
     @Override
     public void onDestroy() {
-        testUseCase.dispose();
+        useCaseExecutor.dispose();
     }
 }

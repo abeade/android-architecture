@@ -1,8 +1,8 @@
 package com.abeade.android.architecture.testapp.setup.di.module;
 
-import com.abeade.android.architecture.testapp.data.webservice.WebserviceConstants;
-import com.abeade.android.architecture.testapp.data.webservice.api.UsersApi;
-import com.abeade.android.architecture.testapp.setup.data.webservice.MockUserService;
+import com.abeade.android.architecture.testapp.data.network.WebserviceConstants;
+import com.abeade.android.architecture.testapp.data.network.api.UsersApi;
+import com.abeade.android.architecture.testapp.setup.data.webservice.MockUserApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -84,6 +84,6 @@ public class MockNetworkModule {
     @Singleton
     UsersApi getUsersService(MockRetrofit mockRetrofit) {
         final BehaviorDelegate<UsersApi> delegate = mockRetrofit.create(UsersApi.class);
-        return new MockUserService(delegate);
+        return new MockUserApi(delegate);
     }
 }

@@ -1,6 +1,7 @@
 package com.abeade.android.architecture.testapp.presentation.view.activity;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -51,7 +52,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     }
 
     @Override
-    public void setText(String text) {
-        tvContent.setText(text);
+    public void setText(@IdRes int stringId) {
+        tvContent.setText(stringId);
+    }
+
+    @Override
+    public void setText(String string) {
+        tvContent.setText(string);
     }
 }
