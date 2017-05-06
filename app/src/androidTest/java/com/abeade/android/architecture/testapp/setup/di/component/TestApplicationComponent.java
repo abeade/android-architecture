@@ -1,6 +1,6 @@
 package com.abeade.android.architecture.testapp.setup.di.component;
 
-import com.abeade.android.architecture.testapp.ExampleInstrumentedTest;
+import com.abeade.android.architecture.testapp.MainActivityInstrumentedTest;
 import com.abeade.android.architecture.testapp.presentation.di.component.ApplicationComponent;
 import com.abeade.android.architecture.testapp.presentation.di.module.ApplicationModule;
 import com.abeade.android.architecture.testapp.presentation.di.module.BuildersModule;
@@ -17,5 +17,5 @@ import dagger.android.support.AndroidSupportInjectionModule;
 public interface TestApplicationComponent extends ApplicationComponent {
 
     void inject(TestAndroidApplication app);
-    void inject(ExampleInstrumentedTest exampleInstrumentedTest);
+    void inject(MainActivityInstrumentedTest exampleInstrumentedTest);
 }
